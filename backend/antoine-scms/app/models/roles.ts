@@ -1,12 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import User from '#models/user'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
-export default class Role extends BaseModel {
+export default class Roles extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
   declare role: string
+
+  @hasMany(() => User)
+  declare users: HasMany<typeof User>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

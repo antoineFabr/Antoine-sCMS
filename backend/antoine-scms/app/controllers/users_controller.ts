@@ -16,12 +16,12 @@ export default class UsersController {
         email: payload.email,
         password: payload.password,
         //role de visiteur
-        role_id: 1,
+        role_id: 1
       })
 
       return response.status(200).send('Utilisateur créé avec succès')
     } catch (err) {
-      return response.status(403).send("utilisateur n'a pas pu etre créé")
+      return response.status(403).send(err)
     }
   }
 

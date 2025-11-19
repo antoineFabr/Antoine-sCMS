@@ -1,9 +1,9 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import Role from '#models/role'
+import Roles from '#models/roles'
 
 export default class extends BaseSeeder {
   async run() {
-    await Role.createMany([
+    await Roles.createMany([
       {
         role: 'visitor',
       },

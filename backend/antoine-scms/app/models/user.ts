@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import Roles from '#models/roles'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -21,6 +23,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare role_id: number
+
+  @belongsTo(() => Roles)
+  declare role: BelongsTo<typeof Roles>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
