@@ -43,8 +43,29 @@ export default class ArtistesController {
       return response.status(200).send(artiste)
     } catch (err) {
       logger.error({ err: err }, `erreur lors de la récuperation de l'artiste ${id}`)
+      return response.status(500).send(`erreur lors de la recuperation de l'artiste ${id}`)
     }
   }
-  async modify({}: HttpContext) {}
+  async modify({ request, params, response }: HttpContext) {
+    const id = params.id
+    try {
+      if (isNaN(Number(id))) {
+        return response.status(404).send("l'id de l'artiste doit etre un nombre")
+      }
+      const payload = await request.validateUsing(ArtisteValidator)
+
+      const artiste = await Artiste.findByOrFail('id', id)
+      if (!artiste) {
+        return response.status(404).send("l'artiste n'a pas été trouvé")
+      }
+      artiste.merge(payload)
+      await artiste.save()
+
+      return response.status(200).send("l'artiste a bien été modifié")
+    } catch (err) {
+      logger.error({ err: err }, `erreur lors de la modification de l'artiste ${id}`)
+      return response.status(500).send(`erreur lors de la modification de l'artiste ${id}`)
+    }
+  }
   async delete({}: HttpContext) {}
 }
