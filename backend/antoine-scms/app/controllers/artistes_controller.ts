@@ -29,21 +29,19 @@ export default class ArtistesController {
       return response.status(500).send("erreur de création d'artiste")
     }
   }
-  async getById({ params, response }: HttpContext) {
-    const id = params.id
+  async getByName({ params, response }: HttpContext) {
+    const name = params.name
 
     try {
-      if (isNaN(Number(id))) {
-        return response.status(404).send("l'id de l'artiste doit etre un nombre")
-      }
-      const artiste = await Artiste.findBy('id', id)
+      
+      const artiste = await Artiste.findBy('pseudo', name)
       if (!artiste) {
         return response.status(404).send('artiste pas trouvé')
       }
       return response.status(200).send(artiste)
     } catch (err) {
-      logger.error({ err: err }, `erreur lors de la récuperation de l'artiste ${id}`)
-      return response.status(500).send(`erreur lors de la recuperation de l'artiste ${id}`)
+      logger.error({ err: err }, `erreur lors de la récuperation de l'artiste ${name}`)
+      return response.status(500).send(`erreur lors de la recuperation de l'artiste ${name}`)
     }
   }
   async modify({ request, params, response }: HttpContext) {
