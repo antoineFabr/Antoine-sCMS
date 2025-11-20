@@ -1,8 +1,11 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { UserValidator } from '#validators/user'
 import { LoginUserValidator } from '#validators/login_user'
+import logger from '@adonisjs/core/services/logger'
+
 import User from '#models/user'
 import hash from '@adonisjs/core/services/hash'
+import Roles from '#models/roles'
 
 export default class UsersController {
   /**
@@ -12,15 +15,16 @@ export default class UsersController {
     try {
       const payload = await request.validateUsing(UserValidator)
 
-      await User.create({
+      const role = await Roles.findByOrFail('role', 'visitor')
+
+      await role.related('users').create({
         email: payload.email,
         password: payload.password,
-        //role de visiteur
-        role_id: 1
       })
 
       return response.status(200).send('Utilisateur créé avec succès')
     } catch (err) {
+      logger.error({ err: err }, 'erreur ')
       return response.status(403).send(err)
     }
   }

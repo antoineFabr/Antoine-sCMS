@@ -24,7 +24,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare role_id: number
 
-  @belongsTo(() => Roles)
+  @belongsTo(() => Roles, {
+    foreignKey: 'role_id',
+  })
   declare role: BelongsTo<typeof Roles>
 
   @column.dateTime({ autoCreate: true })
