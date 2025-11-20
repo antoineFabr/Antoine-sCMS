@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.1.0">
+  <diagram name="Page-1" id="Og6UfOZOCOEG8oaZpDMe">
+    <mxGraphModel dx="1426" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="290" width="580" x="50" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page artiste" vertex="1">
+          <mxGeometry height="60" width="120" x="130" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-3" edge="1" parent="1" source="Fjg71LkthA0gbRODeaOZ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Fjg71LkthA0gbRODeaOZ-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-4" connectable="0" parent="Fjg71LkthA0gbRODeaOZ-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Id artiste" vertex="1">
+          <mxGeometry relative="1" x="-0.0122" y="-5" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page news" vertex="1">
+          <mxGeometry height="60" width="120" x="414" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Partie public" vertex="1">
+          <mxGeometry height="30" width="60" x="310" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="330" width="580" x="100" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Partie admin" vertex="1">
+          <mxGeometry height="30" width="60" x="354" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page création artiste" vertex="1">
+          <mxGeometry height="60" width="120" x="140" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page création news" vertex="1">
+          <mxGeometry height="60" width="120" x="520" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page modification artiste&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="120" x="140" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page modification news" vertex="1">
+          <mxGeometry height="60" width="120" x="520" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="210" width="640" x="80" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Partie configuration du site" vertex="1">
+          <mxGeometry height="30" width="60" x="354" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page création de compte admin" vertex="1">
+          <mxGeometry height="60" width="120" x="110" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="Fjg71LkthA0gbRODeaOZ-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Page info du site" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="385" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
