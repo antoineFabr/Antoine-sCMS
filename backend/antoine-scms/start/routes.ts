@@ -10,19 +10,14 @@ import UsersController from '#controllers/users_controller'
 import router from '@adonisjs/core/services/router'
 import ArtistesController from '#controllers/artistes_controller'
 import OeuvresController from '#controllers/oeuvres_controller'
+import { middleware } from './kernel.js'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
-
+// /api
 router
   .group(() => {
     router.post('/register', [UsersController, 'create'])
-
     router.post('/login', [UsersController, 'login'])
-
+    // /artiste
     router
       .group(() => {
         router.get('/', [ArtistesController, 'getAll'])
@@ -32,12 +27,20 @@ router
         router.delete('/:id', [ArtistesController, 'delete'])
       })
       .prefix('artiste')
-    router.group(() => {
-      router.get('/',[OeuvresController,"getAll"])
-      router.post("/", [OeuvresController, "create"])
-      router.get("/:name",[OeuvresController, "getByName"])
-      router.put("/:id", [OeuvresController, "modify"])
-      router.delete("/:id", [OeuvresController, "delete"])
-    }).prefix("oeuvre")
+    // /oeuvre
+    router
+      .group(() => {
+        router.get('/', [OeuvresController, 'getAll'])
+        router.get('/:name', [OeuvresController, 'getByName'])
+        router
+          .group(() => {
+            router.post('/', [OeuvresController, 'create'])
+            router.put('/:id', [OeuvresController, 'modify'])
+            router.delete('/:id', [OeuvresController, 'delete'])
+          })
+          //on regarde pour toutes ces routes si l'utilisateur est un admin
+          .use(middleware.roleCheck())
+      })
+      .prefix('oeuvre')
   })
   .prefix('api')
