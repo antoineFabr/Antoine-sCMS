@@ -4,6 +4,7 @@ import type { NextFn } from '@adonisjs/core/types/http'
 export default class RoleCheckMiddleware {
   public async handle({ auth, response }: HttpContext, next: NextFn) {
     const user = auth.getUserOrFail()
+
     if (!auth.isAuthenticated) {
       return response.status(401).send('Utilisateur non connecté')
     }

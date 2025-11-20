@@ -25,6 +25,7 @@ export default function Login() {
 
     const response = await fetch("http://localhost:3333/api/login", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: form.mail.trim(),
@@ -38,7 +39,7 @@ export default function Login() {
       return;
     }
     setLoading(false);
-    router.push("/admin");
+    router.push("/");
   };
 
   return (
