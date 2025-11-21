@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function AdminPage() {
   const { user, loading, isAdmin } = useAuth();
@@ -14,19 +15,24 @@ export default function AdminPage() {
     }
   }, [loading, isAdmin, router]);
 
+  // Afficher un loader pendant la vérification
   if (loading) {
-    return <div>Chargement....</div>;
+    return <div>Chargement...</div>; // ou un spinner
   }
 
+  // Redirection en cours, ne rien afficher
   if (!isAdmin) {
     return null;
   }
+
   return (
     <>
       <h1>Admin Dashboard</h1>
 
       <p>Bienvenue, {user?.id}</p>
       <p>Role: {user?.role}</p>
+
+      <Link href={"/admin/artiste"}>artistes</Link>
     </>
   );
 }
