@@ -16,7 +16,7 @@ export default class OeuvresController {
   }
 
   async getByName({ params, response }: HttpContext) {
-    const name = params.name
+    const name = decodeURIComponent(params.name)
 
     try {
       const oeuvre = await Oeuvre.findBy('nom', name)

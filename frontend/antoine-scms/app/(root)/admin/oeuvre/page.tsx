@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { OeuvreAdminComponent } from "@/components/ui/admin/oeuvre/oeuvreComponent";
+import { oeuvre } from "@/type/oeuvre";
 
-type oeuvre = {
-  id: number;
-  nom: string;
-  description: string;
-};
-
-export default function ArtistePage() {
-  const [artistes, setArtistes] = useState<oeuvre[]>([]);
+export default function OeuvrePage() {
+  const [oeuvres, setOeuvres] = useState<oeuvre[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
   useEffect(() => {
@@ -24,7 +20,7 @@ export default function ArtistePage() {
           },
         });
         const data: oeuvre[] = await response.json();
-        setArtistes(data);
+        setOeuvres(data);
       } catch {
         setError("Erreur lors de la récuperation des oeuvres !");
       } finally {
@@ -39,11 +35,7 @@ export default function ArtistePage() {
       {loading ? (
         <p>Chargement...</p>
       ) : (
-        <ul>
-          {artistes.map((x) => (
-            <li key={x.id}>{x.nom}</li>
-          ))}
-        </ul>
+        oeuvres.map((x) => <OeuvreAdminComponent key={x.id} oeuvre={x} />)
       )}
     </div>
   );
