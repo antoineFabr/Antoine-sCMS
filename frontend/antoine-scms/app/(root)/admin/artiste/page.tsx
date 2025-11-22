@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { artiste } from "@/type/artiste";
-import { ArtisteAdminComponent } from "@/components/ui/admin/artisteComponent";
+import { ArtisteAdminComponent } from "@/components/ui/admin/artiste/artisteComponent";
 
 export default function ArtistePage() {
   const [artistes, setArtistes] = useState<artiste[]>([]);

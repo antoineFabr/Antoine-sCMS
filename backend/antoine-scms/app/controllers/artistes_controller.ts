@@ -30,10 +30,9 @@ export default class ArtistesController {
     }
   }
   async getByName({ params, response }: HttpContext) {
-    const name = params.name
+    const name = decodeURIComponent(params.name)
 
     try {
-      
       const artiste = await Artiste.findBy('pseudo', name)
       if (!artiste) {
         return response.status(404).send('artiste pas trouvé')
@@ -51,7 +50,7 @@ export default class ArtistesController {
         return response.status(404).send("l'id de l'artiste doit etre un nombre")
       }
       const payload = await request.validateUsing(ArtisteValidator)
-
+      console.log(payload)
       const artiste = await Artiste.findByOrFail('id', id)
       if (!artiste) {
         return response.status(404).send("l'artiste n'a pas été trouvé")

@@ -3,12 +3,16 @@
 import type { artiste } from "@/type/artiste";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function ArtisteAdminComponent({ artiste }: { artiste: artiste }) {
+  const router = useRouter();
   const modify = () => {};
   const destroy = () => {};
   const pathname = usePathname();
-  const goToPage = () => {};
+  const goToPage = () => {
+    router.push(`/admin/artiste/${artiste.pseudo}`);
+  };
   return (
     <div
       onClick={goToPage}
