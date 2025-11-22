@@ -20,6 +20,26 @@ export default class extends BaseSeeder {
         description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
       },
       {
+        nom: 'Balance ton quoi',
+        description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
+      },
+      {
+        nom: 'Balance ton quoi',
+        description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
+      },
+      {
+        nom: 'Balance ton quoi',
+        description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
+      },
+      {
+        nom: 'Balance ton quoi',
+        description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
+      },
+      {
+        nom: 'Balance ton quoi',
+        description: 'Titre pop engagé dénonçant le harcèlement et les inégalités de genre.',
+      },
+      {
         nom: 'Tout oublier',
         description: 'Duo familial dansant et nostalgique, devenu un tube incontournable.',
       },
@@ -75,24 +95,29 @@ export default class extends BaseSeeder {
     // Angèle & Stromae - Tout oublier (collaboration)
     if (angele && stromae) {
       await oeuvres[3].related('artistes').attach([angele.id, stromae.id])
+      await oeuvres[4].related('artistes').attach([angele.id, stromae.id])
+
+      await oeuvres[5].related('artistes').attach([angele.id, stromae.id])
+      await oeuvres[6].related('artistes').attach([angele.id, stromae.id])
+      await oeuvres[7].related('artistes').attach([angele.id, stromae.id])
     }
 
     // Orelsan
     if (orelsan) {
-      await oeuvres[4].related('artistes').attach([orelsan.id])
-      await oeuvres[5].related('artistes').attach([orelsan.id])
+      await oeuvres[8].related('artistes').attach([orelsan.id])
+      await oeuvres[9].related('artistes').attach([orelsan.id])
     }
 
     // Charlotte de Witte
     if (charlotte) {
-      await oeuvres[6].related('artistes').attach([charlotte.id])
+      await oeuvres[10].related('artistes').attach([charlotte.id])
     }
 
     // Stromae
     if (stromae) {
-      await oeuvres[7].related('artistes').attach([stromae.id])
-      await oeuvres[8].related('artistes').attach([stromae.id])
-      await oeuvres[9].related('artistes').attach([stromae.id])
+      await oeuvres[11].related('artistes').attach([stromae.id])
+      await oeuvres[12].related('artistes').attach([stromae.id])
+      await oeuvres[13].related('artistes').attach([stromae.id])
     }
   }
 }

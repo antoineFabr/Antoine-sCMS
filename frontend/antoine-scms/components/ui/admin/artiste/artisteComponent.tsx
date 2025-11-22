@@ -27,21 +27,7 @@ export function ArtisteAdminComponent({ artiste }: { artiste: artiste }) {
       <div
         className="flex gap-4 text-sm pt-2"
         onClick={(e) => e.stopPropagation()}
-      >
-        <Link
-          href={`${pathname}/modify`}
-          className="text-blue-600 hover:underline"
-        >
-          Modifier
-        </Link>
-
-        <Link
-          href={`${pathname}/delete`}
-          className="text-red-500 hover:underline"
-        >
-          Supprimer
-        </Link>
-      </div>
+      ></div>
     </div>
   );
 }

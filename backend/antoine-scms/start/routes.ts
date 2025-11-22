@@ -31,9 +31,14 @@ router
       .group(() => {
         router.get('/', [ArtistesController, 'getAll'])
         router.post('/', [ArtistesController, 'create'])
-        router.get('/:name', [ArtistesController, 'getByName'])
-        router.put('/:id', [ArtistesController, 'modify'])
-        router.delete('/:id', [ArtistesController, 'delete'])
+        router
+          .group(() => {
+            router.get('/:name/oeuvre', [ArtistesController, 'getOeuvre'])
+            router.get('/:name', [ArtistesController, 'getByName'])
+            router.put('/:id', [ArtistesController, 'modify'])
+            router.delete('/:id', [ArtistesController, 'delete'])
+          })
+          .use([middleware.roleCheck()])
       })
       .prefix('artiste')
 

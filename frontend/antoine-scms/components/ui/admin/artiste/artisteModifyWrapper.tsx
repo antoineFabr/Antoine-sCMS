@@ -1,16 +1,22 @@
 "use client";
 
 import type { artiste } from "@/type/artiste";
+import type { oeuvre } from "@/type/oeuvre";
 import { useState } from "react";
 import { ArtisteModifyComponent } from "@/components/ui/admin/artiste/artisteModifyComponent";
 import ArtisteViewComponent from "@/components/ui/artiste/artisteViewComponent"; // ou ton composant d'affichage public
 
-export function ArtisteModifyWrapper({ artiste }: { artiste: artiste }) {
+export function ArtisteModifyWrapper({
+  artiste,
+  oeuvres,
+}: {
+  artiste: artiste;
+  oeuvres: oeuvre[];
+}) {
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const [artisteData, setArtisteData] = useState<artiste>(artiste);
   const handleSubmit = async () => {
     try {
-      console.log("put");
       const res = await fetch(
         `http://localhost:3333/api/artiste/${artiste.id}`,
         {
@@ -108,7 +114,7 @@ export function ArtisteModifyWrapper({ artiste }: { artiste: artiste }) {
             onUpdate={setArtisteData}
           />
         ) : (
-          <ArtisteViewComponent artiste={artisteData} />
+          <ArtisteViewComponent artiste={artisteData} oeuvres={oeuvres} />
         )}
       </div>
     </div>

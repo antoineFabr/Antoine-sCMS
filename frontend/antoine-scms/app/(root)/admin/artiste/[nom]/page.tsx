@@ -1,6 +1,7 @@
 "use client";
 
 import type { artiste } from "@/type/artiste";
+import type { oeuvre } from "@/type/oeuvre";
 import { useEffect, useState } from "react";
 import { ArtisteModifyWrapper } from "@/components/ui/admin/artiste/artisteModifyWrapper";
 type props = {
@@ -11,18 +12,39 @@ export default function ArtistePage({ params }: props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [artiste, setArtiste] = useState<artiste | null>(null);
+  const [oeuvres, setOeuvre] = useState<oeuvre[] | null>(null);
 
   useEffect(() => {
     let mounted = true;
     const fetchArtiste = async () => {
       try {
         const { nom } = await params;
-        const res = await fetch(`http://localhost:3333/api/artiste/${nom}`);
-        if (!res.ok) {
+        const resOeuvre = await fetch(
+          `http://localhost:3333/api/artiste/${nom}/oeuvre`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const resArtiste = await fetch(
+          `http://localhost:3333/api/artiste/${nom}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (!resArtiste.ok) {
           throw new Error("artiste introuvable");
         }
-        const data: artiste = await res.json();
-        if (mounted) setArtiste(data);
+        if (!resOeuvre.ok) {
+          throw new Error("artiste introuvable");
+        }
+        const dataOeuvres: oeuvre[] = await resOeuvre.json();
+        const dataArtiste: artiste = await resArtiste.json();
+        if (mounted) {
+          setArtiste(dataArtiste);
+          setOeuvre(dataOeuvres);
+        }
       } catch (err) {
         if (mounted)
           setError((err as Error).message || "Erreur lors de la récupération");
@@ -58,7 +80,7 @@ export default function ArtistePage({ params }: props) {
 
   return (
     <>
-      <ArtisteModifyWrapper artiste={artiste} />
+      <ArtisteModifyWrapper oeuvres={oeuvres ?? []} artiste={artiste} />
     </>
   );
 }

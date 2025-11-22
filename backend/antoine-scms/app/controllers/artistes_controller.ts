@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Artiste from '#models/artiste'
 import logger from '@adonisjs/core/services/logger'
 import { ArtisteValidator } from '#validators/artiste_create'
+import Oeuvre from '#models/oeuvre'
 
 export default class ArtistesController {
   async getAll({ response }: HttpContext) {
@@ -81,6 +82,24 @@ export default class ArtistesController {
     } catch (err) {
       logger.error({ err: err }, `Erreur lors de la suppression de l'artiste ${id}`)
       return response.status(500).send(`Erreur lors de la suppression de l'artiste ${id}`)
+    }
+  }
+  async getOeuvre({ params, response }: HttpContext) {
+    const name = decodeURIComponent(params.name)
+    try {
+      const oeuvres = await Oeuvre.query().whereHas('artistes', (query) => {
+        query.where('pseudo', name)
+      })
+
+      if (!oeuvres) {
+        return response.status(404).send('artiste pas trouvé')
+      }
+      return response.status(200).send(oeuvres)
+    } catch (err) {
+      logger.error({ err: err }, `erreur lors de la récuperation des oeuvres de l'artiste ${name}`)
+      return response
+        .status(500)
+        .send(`erreur lors de la recuperation des oeuvres de l'artiste ${name}`)
     }
   }
 }
