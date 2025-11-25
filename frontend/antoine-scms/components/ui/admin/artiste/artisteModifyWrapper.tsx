@@ -1,10 +1,10 @@
 "use client";
 
-import type { artiste } from "@/type/artiste";
+import type { artiste, Block } from "@/type/artiste";
 import type { oeuvre } from "@/type/oeuvre";
 import { useState } from "react";
 import { ArtisteModifyComponent } from "@/components/ui/admin/artiste/artisteModifyComponent";
-import ArtisteViewComponent from "@/components/ui/artiste/artisteViewComponent"; // ou ton composant d'affichage public
+import ArtisteRenderer from "@/components/PageBuilder/ArtisteRenderer";
 
 export function ArtisteModifyWrapper({
   artiste,
@@ -15,6 +15,32 @@ export function ArtisteModifyWrapper({
 }) {
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const [artisteData, setArtisteData] = useState<artiste>(artiste);
+
+  const applyTemplate = (templateName: string) => {
+    let newLayout: Block[] = [];
+
+    if (templateName === "minimal") {
+      newLayout = [
+        {
+          id: "1",
+          type: "hero",
+          props: { theme: "simple", showAvatar: false },
+        },
+        { id: "2", type: "works", props: {} }, // Oeuvres avant la bio
+        { id: "3", type: "bio", props: { title: "L'auteur" } },
+      ];
+    } else {
+      // Template par défaut (Gradient)
+      newLayout = [
+        { id: "1", type: "hero", props: { theme: "gradient" } },
+        { id: "2", type: "bio", props: {} },
+        { id: "3", type: "works", props: {} },
+      ];
+    }
+
+    setArtisteData({ ...artisteData, pageLayout: newLayout });
+  };
+
   const handleSubmit = async () => {
     try {
       const res = await fetch(
@@ -114,7 +140,7 @@ export function ArtisteModifyWrapper({
             onUpdate={setArtisteData}
           />
         ) : (
-          <ArtisteViewComponent artiste={artisteData} oeuvres={oeuvres} />
+          <ArtisteRenderer artiste={artisteData} oeuvres={oeuvres} />
         )}
       </div>
     </div>

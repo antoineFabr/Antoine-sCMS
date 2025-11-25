@@ -3,6 +3,12 @@ import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import Oeuvre from '#models/oeuvre'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 
+type PageBlock = {
+  id: string
+  type: string
+  props: Record<string, any>
+}
+
 export default class Artiste extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
@@ -12,6 +18,15 @@ export default class Artiste extends BaseModel {
 
   @column()
   declare description: string
+
+  @column({
+    prepare: (value: PageBlock[]) => JSON.stringify(value),
+    consume: (value: string) => JSON.parse(value),
+  })
+  declare pageLayout: PageBlock[] | null
+
+  @column()
+  declare templateModel: string
 
   @manyToMany(() => Oeuvre, {
     pivotTable: 'oeuvre_artiste',
