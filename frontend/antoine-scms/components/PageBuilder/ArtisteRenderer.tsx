@@ -3,6 +3,8 @@ import ArtisteBio from "@/components/blocks/artiste/ArtisteBio";
 import WorkGrid from "@/components/blocks/artiste/WorksGrid";
 import type { artiste } from "@/type/artiste";
 import { oeuvre } from "@/type/oeuvre";
+import ArtisteModifyView from "../ui/admin/artiste/artisteModifiyView";
+import { useState } from "react";
 
 const COMPONENT_MAP: Record<string, React.FC<any>> = {
   header: ArtisteHeader,
@@ -22,8 +24,17 @@ interface Props {
 }
 
 export default function ArtisteRenderer({ artiste, oeuvres }: Props) {
-  const layout = artiste.pageLayout || DEFAULT_LAYOUT;
+  const [layout, setLayout] = useState(artiste.pageLayout || DEFAULT_LAYOUT);
 
+  const updateBlock = (blockId: string, newProps: any) => {
+    setLayout((prevLayout) =>
+      prevLayout.map((block) =>
+        block.id === blockId
+          ? { ...block, props: { ...block.props, ...newProps } }
+          : block
+      )
+    );
+  };
   return (
     <div className="page-container">
       {layout.map((block) => {
@@ -33,12 +44,18 @@ export default function ArtisteRenderer({ artiste, oeuvres }: Props) {
         }
 
         return (
-          <Component
+          <ArtisteModifyView
             key={block.id}
-            data={artiste} // Données de l'artiste
-            oeuvres={oeuvres} // Données des oeuvres (si besoin)
-            blockProps={block.props}
-          />
+            blockId={block.id} // 👈 On passe l'ID
+            onUpdate={updateBlock} // 👈 On passe la fonction de mise à jour
+            currentProps={block.props}
+          >
+            <Component
+              data={artiste}
+              oeuvres={oeuvres}
+              blockProps={block.props}
+            />
+          </ArtisteModifyView>
         );
       })}
     </div>

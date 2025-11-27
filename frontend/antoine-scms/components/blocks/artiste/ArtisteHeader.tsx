@@ -1,6 +1,7 @@
 import React from "react";
 import { artiste } from "@/type/artiste";
 import { ArtisteBlockConfig } from "@/type/blocks";
+import Image from "next/image";
 
 interface ArtisteBlock {
   data: artiste;
@@ -11,6 +12,7 @@ export default function ArtisteHeader({ data, blockProps }: ArtisteBlock) {
   const containerStyle = {
     textAlign: blockProps.align, // Sûr d'être 'left', 'center' ou 'right'
     backgroundColor: blockProps.backgroundColor || "#fff", // Valeur par défaut
+
     padding: "2rem",
   };
 
